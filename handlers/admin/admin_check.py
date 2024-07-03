@@ -1,6 +1,7 @@
 from aiogram import types
 from keyboards.inline.btn import button, button_for_admin, ruxsat
 from loader import bot, dp
+from handlers.users import start
 
 
 async def save_data(teacher_user_id, teacher_name, teacher_time, filial, teacher_group, change_teacher, sababi):
@@ -14,20 +15,20 @@ async def save_data(teacher_user_id, teacher_name, teacher_time, filial, teacher
     current_change_teacher = change_teacher
     current_sababi = sababi
 
+
     await bot.send_message(
-        chat_id=current_user_id,
-        text=f'''
-🧍‍♂️Hodim : <b>{teacher_name}</b>
-🗓 Sana : <b>{teacher_time}</b>
-🏢 Filial : <b>{filial}</b>
-🗂️ Guruh : <b>{teacher_group}</b>
-🧍‍♂️ O'rniga tayinlanadigan hodim : <b>{change_teacher}</b>
-📝 Sabab : <b>{sababi}</b>
-        ''',
+            chat_id=current_user_id,
+            text=f'''
+🧍‍♂️Hodim : <b>{current_teacher_name}</b>
+🗓 Sana : <b>{current_teacher_time}</b>
+🏢 Filial : <b>{current_filial}</b>
+🗂️ Guruh : <b>{current_teacher_group}</b>
+🧍‍♂️ O'rniga tayinlanadigan hodim : <b>{current_change_teacher}</b>
+📝 Sabab : <b>{current_sababi}</b>
+            ''',
 
-        reply_markup=button,
-    )
-
+            reply_markup=button,
+        )
 
 user_messages = {}
 
@@ -75,13 +76,13 @@ async def process_confirm(callback_query: types.CallbackQuery):
 async def process_admin_confirm(callback_query: types.CallbackQuery):
     await bot.send_message(callback_query.from_user.id, "Siz ma'lumotlarni tasdiqladingiz.")
 
-    if current_user_id in user_messages:
+    if int(current_user_id) in user_messages:
         messages = user_messages[current_user_id]
         await bot.delete_message(chat_id=current_user_id, message_id=messages["user_message_id"])
         await bot.delete_message(chat_id=callback_query.from_user.id, message_id=messages["admin_message_id"])
 
     await bot.send_message(
-        current_user_id,
+        int(current_user_id),
         f"""Sizning so'rovingiz <b>TASDIQLANDI✅</b>.\n
 🧍‍♂️Hodim : <b>{current_teacher_name}</b>
 🗓 Sana : <b>{current_teacher_time}</b>
@@ -120,7 +121,7 @@ async def process_reject(callback_query: types.CallbackQuery):
 
 @dp.callback_query_handler(text='admin_rad_etish')
 async def process_reject(callback_query: types.CallbackQuery):
-    if current_user_id in user_messages:
+    if int(current_user_id) in user_messages:
         messages = user_messages[current_user_id]
         await bot.delete_message(chat_id=current_user_id, message_id=messages["user_message_id"])
         await bot.delete_message(chat_id=callback_query.from_user.id, message_id=messages["admin_message_id"])
