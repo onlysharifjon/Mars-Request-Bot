@@ -55,7 +55,7 @@ async def get_group(call: types.CallbackQuery, state: FSMContext):
     filial = calllll.upper()
     await state.finish()
     await call.message.answer(f'Tanlangan filial: <b>{filial}</b>')
-    await call.message.answer(""""Guruhingizni kiriting ⬇️
+    await call.message.answer("""Guruhingizni kiriting ⬇️
 
 ✅ BG-1375
 ❌ bg1375""")
