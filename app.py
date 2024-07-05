@@ -5,12 +5,12 @@ from aiogram import types
 import middlewares, filters, handlers
 from utils.notify_admins import on_startup_notify
 from utils.set_bot_commands import set_default_commands
-from data.config import BOT_TOKEN, WEBAPP_HOST, WEBHOOK_PATH, WEBHOOK_HOST, WEBAPP_PORT
+from data.config import BOT_TOKEN, WEBAPP_HOST, WEBHOOK_PATH_NAME, WEBHOOK_HOST, WEBAPP_PORT
 from aiogram.utils.executor import start_webhook
 from aiohttp import web
 
-WEBHOOK_HOST = WEBHOOK_HOST
-WEBHOOK_PATH = WEBHOOK_PATH
+
+WEBHOOK_PATH = f'/{WEBHOOK_PATH_NAME}/{BOT_TOKEN}/'
 WEBHOOK_URL = f'{WEBHOOK_HOST}{WEBHOOK_PATH}'
 WEBAPP_HOST = WEBAPP_HOST
 WEBAPP_PORT = WEBAPP_PORT
