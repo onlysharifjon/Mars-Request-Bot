@@ -85,6 +85,5 @@ async def yuborildi(message: types.Message, state: FSMContext):
         data[user_id]['change_teacher'],
         data[user_id]["sababi"]
     )
-    await message.answer("Ma'lumotlar saqlandi. Rahmat!")
     await state.finish()
     print(data)

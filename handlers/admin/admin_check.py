@@ -2,6 +2,7 @@ from aiogram import types
 from keyboards.inline.btn import button, button_for_admin, ruxsat
 from loader import bot, dp
 from handlers.users import start
+from data.config import *
 
 
 async def save_data(teacher_user_id, teacher_name, teacher_time, filial, teacher_group, change_teacher, sababi):
@@ -35,7 +36,7 @@ user_messages = {}
 
 @dp.callback_query_handler(text='tasdiqlash')
 async def process_confirm(callback_query: types.CallbackQuery):
-    admin_chat_id = 5120362988
+    admin_chat_id = SUPER_ADMIN_CHAT_ID
 
     admin_message = await bot.send_message(
         chat_id=admin_chat_id,
@@ -95,7 +96,7 @@ async def process_admin_confirm(callback_query: types.CallbackQuery):
         parse_mode="HTML"
     )
 
-    group_chat_id = -4270625456
+    group_chat_id = GROUP_CHAT_ID
     await bot.send_message(
         chat_id=group_chat_id,
         text=f'''
@@ -134,7 +135,7 @@ async def process_reject(callback_query: types.CallbackQuery):
 🧍‍♂️ O'rniga tayinlanadigan hodim : <b>{current_change_teacher}</b>
 📝 Sabab : <b>{current_sababi}</b>""", reply_markup=ruxsat)
 
-    group_chat_id = -4270625456
+    group_chat_id = -1002148686406
     await bot.send_message(
         chat_id=group_chat_id,
         text=f'''
